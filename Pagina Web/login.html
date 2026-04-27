@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accés · Kontor Tek Inc.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&family=Exo+2:wght@200;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">KONTOR<span>TEK</span></a>
+    <a href="index.html" class="nav-back">Tornar a l'inici</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="auth-container">
+
+      <!-- HEADER -->
+      <div class="auth-header">
+        <div class="auth-badge">Accés segur · HTTPS</div>
+        <h1>Benvingut/da a <span>KontorTek</span></h1>
+        <p>Inicia sessió o crea un compte per accedir a la plataforma de seguretat.</p>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Iniciar sessió</button>
+        <button class="tab-btn"        onclick="switchTab('register')">Crear compte</button>
+      </div>
+
+      <div class="auth-panel">
+
+        <!-- ══════════════════════════════
+             TAB: LOGIN
+        ══════════════════════════════ -->
+        <div class="tab-content active" id="tab-login">
+
+          <div class="db-note">
+            <!--
+            ╔══════════════════════════════════════════════════════════════════╗
+            ║  🗄️  CONNEXIÓ BASE DE DADES — LOGIN                            ║
+            ║  Endpoint: POST /api/login.php                                  ║
+            ║                                                                  ║
+            ║  Lògica PHP:                                                    ║
+            ║  1. Rebre JSON: { email, password }                             ║
+            ║  2. SELECT id, nom, contrasenya, subscrit                       ║
+            ║        FROM usuari WHERE email = ? (prepared statement)         ║
+            ║  3. password_verify($pass, $row['contrasenya'])                 ║
+            ║  4. Si ok → session_start(); $_SESSION['user_id'] = $id;       ║
+            ║  5. Retorn: { "success": true, "nom": "...", "subscrit": 0|1 } ║
+            ║          o: { "success": false, "error": "Missatge" }          ║
+            ╚══════════════════════════════════════════════════════════════════╝
+            -->
+            <strong>📌 BACKEND LOGIN:</strong>
+            Connecta al fitxer <code>/api/login.php</code>.<br>
+            Consulta la taula <code>usuari</code> per email + verifica el hash de contrasenya.<br>
+            Inicia la sessió PHP i redirigeix a <code>/dashboard</code>.
+          </div>
+
+          <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
+            <div class="form-grid">
+              <div class="form-group form-full">
+                <label>Correu electrònic</label>
+                <input type="email" id="loginEmail" placeholder="usuari@empresa.com" required autocomplete="email"/>
+              </div>
+              <div class="form-group form-full">
+                <label>Contrasenya</label>
+                <input type="password" id="loginPass" placeholder="••••••••" required autocomplete="current-password"/>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-form">Entrar al sistema →</button>
+            </div>
+          </form>
+
+          <div class="form-msg" id="loginMsg"></div>
+
+          <div class="form-footer">
+            No tens compte?
+            <a onclick="switchTab('register')">Registra't ara</a>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             TAB: REGISTRE
+        ══════════════════════════════ -->
+        <div class="tab-content" id="tab-register">
+
+          <div class="db-note">
+            <!--
+            ╔══════════════════════════════════════════════════════════════════╗
+            ║  🗄️  CONNEXIÓ BASE DE DADES — REGISTRE                        ║
+            ║  Endpoint: POST /api/register.php                               ║
+            ║                                                                  ║
+            ║  Lògica PHP:                                                    ║
+            ║  1. Rebre JSON: { nom, email, password, pla }                  ║
+            ║  2. Comprovar duplicat:                                         ║
+            ║     SELECT id FROM usuari WHERE email = ?                       ║
+            ║  3. Hash: $hash = password_hash($pass, PASSWORD_BCRYPT)         ║
+            ║  4. Inserir:                                                    ║
+            ║     INSERT INTO usuari (nom, email, contrasenya,               ║
+            ║       data_registre, subscrit) VALUES (?,?,?,NOW(),0)           ║
+            ║  5. Si $pla != '' → inserir a subscripcio:                     ║
+            ║     INSERT INTO subscripcio (id_usuari, tipus_pla,             ║
+            ║       data_inici, estat_subscripcio) VALUES (?,?,NOW(),'pendent')║
+            ║  6. Retorn: { "success": true }                                ║
+            ║          o: { "success": false, "error": "Missatge" }          ║
+            ╚══════════════════════════════════════════════════════════════════╝
+            -->
+            <strong>📌 BACKEND REGISTRE:</strong>
+            Connecta al fitxer <code>/api/register.php</code>.<br>
+            Insereix a taula <code>usuari</code> amb <code>password_hash()</code>.<br>
+            Si hi ha pla seleccionat, insereix també a taula <code>subscripcio</code>.
+          </div>
+
+          <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label>Nom</label>
+                <input type="text" id="regNom" placeholder="El teu nom" required autocomplete="given-name"/>
+              </div>
+              <div class="form-group">
+                <label>Cognom</label>
+                <input type="text" id="regCognom" placeholder="El teu cognom" autocomplete="family-name"/>
+              </div>
+
+              <div class="form-group form-full">
+                <label>Correu electrònic</label>
+                <input type="email" id="regEmail" placeholder="usuari@empresa.com" required autocomplete="email"/>
+              </div>
+
+              <div class="form-group">
+                <label>Contrasenya</label>
+                <input type="password" id="regPass" placeholder="Mínim 8 caràcters"
+                       required minlength="8" autocomplete="new-password"
+                       oninput="checkPassStrength(this.value)"/>
+                <div class="pass-strength"><div class="pass-strength-bar" id="passBar"></div></div>
+                <div class="pass-hint" id="passHint">Introdueix una contrasenya</div>
+              </div>
+              <div class="form-group">
+                <label>Confirmar contrasenya</label>
+                <input type="password" id="regPass2" placeholder="Repeteix la contrasenya"
+                       required autocomplete="new-password"/>
+              </div>
+
+              <div class="form-group form-full">
+                <label>Pla d'interès (opcional)</label>
+                <select id="regPla">
+                  <!-- 📝 Actualitza els noms dels plans quan estiguin definits -->
+                  <option value="">— Selecciona un pla —</option>
+                  <option value="basic">Bàsic</option>
+                  <option value="pro">Professional</option>
+                  <option value="enterprise">Enterprise</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-form">Crear compte →</button>
+            </div>
+          </form>
+
+          <div class="form-msg" id="registerMsg"></div>
+
+          <div class="form-footer">
+            Ja tens compte?
+            <a onclick="switchTab('login')">Inicia sessió</a>
+          </div>
+        </div>
+
+      </div><!-- /auth-panel -->
+
+      <!-- SECURITY BADGES -->
+      <div class="security-badges">
+        <div class="sec-badge"><span>🔒</span> Connexió HTTPS xifrada</div>
+        <div class="sec-badge"><span>🛡️</span> Contrasenyes amb hash bcrypt</div>
+        <div class="sec-badge"><span>✅</span> Dades protegides (MySQL)</div>
+      </div>
+
+    </div><!-- /auth-container -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html">← Tornar a Kontor Tek Inc.</a>
+    &nbsp;·&nbsp; Institut Puig Castellar · 2024–2025
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <script src="login.js"></script>
+
+</body>
+</html>
