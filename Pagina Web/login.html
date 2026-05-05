@@ -9,24 +9,20 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav>
     <a href="index.html" class="nav-logo">KONTOR<span>TEK</span></a>
     <a href="index.html" class="nav-back">Tornar a l'inici</a>
   </nav>
 
-  <!-- MAIN -->
   <main>
     <div class="auth-container">
 
-      <!-- HEADER -->
       <div class="auth-header">
         <div class="auth-badge">Accés segur · HTTPS</div>
         <h1>Benvingut/da a <span>KontorTek</span></h1>
         <p>Inicia sessió o crea un compte per accedir a la plataforma de seguretat.</p>
       </div>
 
-      <!-- TABS -->
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('login')">Iniciar sessió</button>
         <button class="tab-btn"        onclick="switchTab('register')">Crear compte</button>
@@ -34,32 +30,7 @@
 
       <div class="auth-panel">
 
-        <!-- ══════════════════════════════
-             TAB: LOGIN
-        ══════════════════════════════ -->
         <div class="tab-content active" id="tab-login">
-
-          <div class="db-note">
-            <!--
-            ╔══════════════════════════════════════════════════════════════════╗
-            ║  🗄️  CONNEXIÓ BASE DE DADES — LOGIN                            ║
-            ║  Endpoint: POST /api/login.php                                  ║
-            ║                                                                  ║
-            ║  Lògica PHP:                                                    ║
-            ║  1. Rebre JSON: { email, password }                             ║
-            ║  2. SELECT id, nom, contrasenya, subscrit                       ║
-            ║        FROM usuari WHERE email = ? (prepared statement)         ║
-            ║  3. password_verify($pass, $row['contrasenya'])                 ║
-            ║  4. Si ok → session_start(); $_SESSION['user_id'] = $id;       ║
-            ║  5. Retorn: { "success": true, "nom": "...", "subscrit": 0|1 } ║
-            ║          o: { "success": false, "error": "Missatge" }          ║
-            ╚══════════════════════════════════════════════════════════════════╝
-            -->
-            <strong>📌 BACKEND LOGIN:</strong>
-            Connecta al fitxer <code>/api/login.php</code>.<br>
-            Consulta la taula <code>usuari</code> per email + verifica el hash de contrasenya.<br>
-            Inicia la sessió PHP i redirigeix a <code>/dashboard</code>.
-          </div>
 
           <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
             <div class="form-grid">
@@ -86,37 +57,7 @@
           </div>
         </div>
 
-        <!-- ══════════════════════════════
-             TAB: REGISTRE
-        ══════════════════════════════ -->
         <div class="tab-content" id="tab-register">
-
-          <div class="db-note">
-            <!--
-            ╔══════════════════════════════════════════════════════════════════╗
-            ║  🗄️  CONNEXIÓ BASE DE DADES — REGISTRE                        ║
-            ║  Endpoint: POST /api/register.php                               ║
-            ║                                                                  ║
-            ║  Lògica PHP:                                                    ║
-            ║  1. Rebre JSON: { nom, email, password, pla }                  ║
-            ║  2. Comprovar duplicat:                                         ║
-            ║     SELECT id FROM usuari WHERE email = ?                       ║
-            ║  3. Hash: $hash = password_hash($pass, PASSWORD_BCRYPT)         ║
-            ║  4. Inserir:                                                    ║
-            ║     INSERT INTO usuari (nom, email, contrasenya,               ║
-            ║       data_registre, subscrit) VALUES (?,?,?,NOW(),0)           ║
-            ║  5. Si $pla != '' → inserir a subscripcio:                     ║
-            ║     INSERT INTO subscripcio (id_usuari, tipus_pla,             ║
-            ║       data_inici, estat_subscripcio) VALUES (?,?,NOW(),'pendent')║
-            ║  6. Retorn: { "success": true }                                ║
-            ║          o: { "success": false, "error": "Missatge" }          ║
-            ╚══════════════════════════════════════════════════════════════════╝
-            -->
-            <strong>📌 BACKEND REGISTRE:</strong>
-            Connecta al fitxer <code>/api/register.php</code>.<br>
-            Insereix a taula <code>usuari</code> amb <code>password_hash()</code>.<br>
-            Si hi ha pla seleccionat, insereix també a taula <code>subscripcio</code>.
-          </div>
 
           <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
             <div class="form-grid">
@@ -152,11 +93,9 @@
               <div class="form-group form-full">
                 <label>Pla d'interès (opcional)</label>
                 <select id="regPla">
-                  <!-- 📝 Actualitza els noms dels plans quan estiguin definits -->
                   <option value="">— Selecciona un pla —</option>
-                  <option value="basic">Bàsic</option>
-                  <option value="pro">Professional</option>
-                  <option value="enterprise">Enterprise</option>
+                  <option value="basic">Mensual</option>
+                  <option value="pro">Anual</option>
                 </select>
               </div>
 
@@ -175,28 +114,153 @@
           </div>
         </div>
 
-      </div><!-- /auth-panel -->
-
-      <!-- SECURITY BADGES -->
-      <div class="security-badges">
-        <div class="sec-badge"><span>🔒</span> Connexió HTTPS xifrada</div>
-        <div class="sec-badge"><span>🛡️</span> Contrasenyes amb hash bcrypt</div>
-        <div class="sec-badge"><span>✅</span> Dades protegides (MySQL)</div>
       </div>
 
-    </div><!-- /auth-container -->
+      <div class="security-badges">
+        <div class="sec-badge"><span></span> Connexió HTTPS xifrada</div>
+        <div class="sec-badge"><span></span> Contrasenyes amb hash bcrypt</div>
+        <div class="sec-badge"><span></span> Dades protegides (MySQL)</div>
+      </div>
+
+    </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <a href="index.html">← Tornar a Kontor Tek Inc.</a>
     &nbsp;·&nbsp; Institut Puig Castellar · 2024–2025
   </footer>
 
-  <!-- TOAST -->
   <div id="toast"></div>
 
-  <script src="login.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
 
+    window.switchTab = function(tab) {
+      var contents = document.querySelectorAll('.tab-content');
+      var buttons  = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < contents.length; i++) contents[i].classList.remove('active');
+      for (var i = 0; i < buttons.length;  i++) buttons[i].classList.remove('active');
+      var content = document.getElementById('tab-' + tab);
+      if (content) content.classList.add('active');
+      if (tab === 'login'    && buttons[0]) buttons[0].classList.add('active');
+      if (tab === 'register' && buttons[1]) buttons[1].classList.add('active');
+      var lm = document.getElementById('loginMsg');
+      var rm = document.getElementById('registerMsg');
+      if (lm) lm.style.display = 'none';
+      if (rm) rm.style.display = 'none';
+    };
+
+    if (new URLSearchParams(window.location.search).get('tab') === 'register') {
+      switchTab('register');
+    }
+
+    window.checkPassStrength = function(val) {
+      var bar  = document.getElementById('passBar');
+      var hint = document.getElementById('passHint');
+      if (!bar || !hint) return;
+      var score = 0;
+      if (val.length >= 8)           score++;
+      if (val.length >= 12)          score++;
+      if (/[A-Z]/.test(val))         score++;
+      if (/[0-9]/.test(val))         score++;
+      if (/[^A-Za-z0-9]/.test(val))  score++;
+      var levels = [
+        { w: '20%',  bg: '#ff4060', txt: 'Molt feble'  },
+        { w: '40%',  bg: '#ff8c00', txt: 'Feble'       },
+        { w: '60%',  bg: '#ffd700', txt: 'Acceptable'  },
+        { w: '80%',  bg: '#00c8ff', txt: 'Bona'        },
+        { w: '100%', bg: '#00ff9d', txt: 'Excel.lent'  }
+      ];
+      var lv = levels[Math.min(score, 4)];
+      bar.style.width      = val.length ? lv.w  : '0%';
+      bar.style.background = val.length ? lv.bg : '';
+      hint.textContent     = val.length ? lv.txt : 'Introdueix una contrasenya';
+      hint.style.color     = val.length ? lv.bg : 'var(--text-dim)';
+    };
+
+    function showToast(msg, type) {
+      var t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.className = (type === 'error') ? 'error show' : 'show';
+      setTimeout(function() { t.className = ''; }, 3500);
+    }
+
+    function showMsg(id, msg, type) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = msg;
+      el.className = 'form-msg ' + type;
+      el.style.display = 'block';
+    }
+
+    window.handleLogin = async function(e) {
+      e.preventDefault();
+      var email = document.getElementById('loginEmail').value.trim();
+      var pass  = document.getElementById('loginPass').value;
+      try {
+        var res  = await fetch('/api/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, password: pass })
+        });
+        var data = await res.json();
+        if (data.success) {
+          showMsg('loginMsg', 'Benvingut/da, ' + data.nom + '! Redirigint...', 'success');
+          showToast('Sessio iniciada: ' + data.nom, 'success');
+          setTimeout(function() { window.location.href = '/index.html'; }, 1500);
+        } else {
+          showMsg('loginMsg', data.error || 'Credencials incorrectes.', 'error');
+        }
+      } catch (err) {
+        showMsg('loginMsg', 'Servidor no disponible.', 'error');
+        console.warn('Login error:', err);
+      }
+    };
+
+    window.handleRegister = async function(e) {
+      e.preventDefault();
+      var nom    = document.getElementById('regNom').value.trim();
+      var cognom = document.getElementById('regCognom').value.trim();
+      var email  = document.getElementById('regEmail').value.trim();
+      var pass   = document.getElementById('regPass').value;
+      var pass2  = document.getElementById('regPass2').value;
+      var pla    = document.getElementById('regPla').value;
+      if (pass !== pass2) {
+        showMsg('registerMsg', 'Les contrasenyes no coincideixen.', 'error'); return;
+      }
+      if (pass.length < 8) {
+        showMsg('registerMsg', 'Minim 8 caracters.', 'error'); return;
+      }
+      try {
+        var nomComplet = nom + (cognom ? ' ' + cognom : '');
+        var res  = await fetch('/api/register.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nom: nomComplet, email: email, password: pass, pla: pla })
+        });
+        var data = await res.json();
+        if (data.success) {
+          showMsg('registerMsg', 'Compte creat! Ara pots iniciar sessio.', 'success');
+          showToast('Compte registrat!', 'success');
+          document.getElementById('registerForm').reset();
+          var bar  = document.getElementById('passBar');
+          var hint = document.getElementById('passHint');
+          if (bar)  bar.style.width = '0%';
+          if (hint) hint.textContent = 'Introdueix una contrasenya';
+          setTimeout(function() { switchTab('login'); }, 2000);
+        } else {
+          showMsg('registerMsg', data.error || 'Error en el registre.', 'error');
+        }
+      } catch (err) {
+        showMsg('registerMsg', 'Servidor no disponible.', 'error');
+        console.warn('Register error:', err);
+      }
+    };
+
+  });
+  </script>
 </body>
+</html>
+
 </html>
