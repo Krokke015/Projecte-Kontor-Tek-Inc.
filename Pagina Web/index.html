@@ -17,14 +17,14 @@
       <li><a href="#serveis">Serveis</a></li>
     </ul>
     <a href="login.html?tab=register" class="nav-cta">Registrar-se</a>
-    <a href="#" class="nav-cta nav-dl" onclick="handleDownloadClick(event)">Descàrrega</a>
+    <a href="/api/download.php" class="nav-cta nav-dl" onclick="handleDownloadClick(event)">Descàrrega</a>
   </nav>
 
   <section id="inici">
     <span class="hero-badge">Sistema de seguretat</span>
     <h1 class="hero-title">
-      <span class="line-dim">nombre</span><br>
-      <span class="line-accent">nombre</span><br>
+      <span class="line-dim">Kontor</span><br>
+      <span class="line-accent">Tek</span><br>
     </h1>
     <p class="hero-subtitle">
       Kontor Tek Inc. ofereix seguretat proactiva i còpies de seguretat automatitzades per a empreses.
@@ -92,12 +92,12 @@
           <p>Detectem i analitzem amenaces en temps real a la teva xarxa. Generem informes detallats amb nivell de risc i accions recomanades per a cada vulnerabilitat.</p>
         </div>
         <div class="feature-card">
-          <h3>Gestió de MACs</h3>
+          <h3>Gestió de IPs</h3>
           <p>Bloqueja i desbloqueja adreces MAC directament des del panell. El sistema pot actuar automàticament en detectar activitat sospitosa gràcies a triggers configurables.</p>
         </div>
         <div class="feature-card">
           
-          <h3>Backup al Núvol</h3>
+          <h3>Backup</h3>
           <p>Configura la freqüència i l'abast de les teves còpies de seguretat. Accedeix i restaura les teves dades des de qualsevol lloc en qualsevol moment.</p>
         </div>
         <div class="feature-card">
@@ -108,7 +108,7 @@
         <div class="feature-card">
           
           <h3>Resposta Automàtica</h3>
-          <p>Triggers automàtics que actuen en detectar amenaces: bloqueig de MACs, notificacions i posada en llista negra sense intervenció manual.</p>
+          <p>Triggers automàtics que actuen en detectar amenaces: bloqueig de IPs, notificacions i posada en llista negra sense intervenció manual.</p>
         </div>
         <div class="feature-card">
           
@@ -139,7 +139,7 @@
           <div class="plan-note">
             Preu pendent de confirmació.
           </div>
-          <a href="login.html?tab=register" class="btn-outline" style="display:block;text-align:center;padding:0.85rem">Seleccionar pla</a>
+          <a href="#" onclick="handlePlanClick(event,'Mensual')" class="btn-outline" style="display:block;text-align:center;padding:0.85rem">Seleccionar pla</a>
         </div>
 
         <div class="plan-card featured">
@@ -151,7 +151,7 @@
           <div class="plan-note">
             Preu pendent de confirmació.
           </div>
-          <a href="login.html?tab=register" class="btn-primary" style="display:block;text-align:center">Seleccionar pla</a>
+          <a href="#" onclick="handlePlanClick(event,'Anual')" class="btn-primary" style="display:block;text-align:center">Seleccionar pla</a>
         </div>
 
       </div>
@@ -187,7 +187,6 @@
         </div>
       </div>
 
-      <!-- ESTAT 2: Registrat sense pla actiu -->
       <div id="modal-no-plan" style="display:none">
         <span class="modal-icon"></span>
         <div class="modal-status-bar">
@@ -201,7 +200,6 @@
         </div>
       </div>
 
-      <!-- ESTAT 3: Registrat amb pla actiu -->
       <div id="modal-download" style="display:none">
         <span class="modal-icon"></span>
         <div class="modal-status-bar">
@@ -209,10 +207,7 @@
         </div>
         <h3>Descarregar <span class="hl">KontorTek</span></h3>
         <p>Versió actual del programari de seguretat i backup. Compatible amb Windows, Linux i macOS.</p>
-        <!--
-          🔀 DESCÀRREGA: substitueix href="/api/download.php" pel fitxer o
-          endpoint real que validi la sessió al servidor abans de servir el binari.
-        -->
+
         <div class="modal-actions">
           <a href="/api/download.php" class="modal-btn">⬇ Descarregar ara</a>
           <button class="modal-btn outline" onclick="closeModal()">Tancar</button>
@@ -222,6 +217,134 @@
     </div>
   </div>
 
+  <div id="plan-modal" onclick="closePlanModalOutside(event)" aria-modal="true" role="dialog">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closePlanModal()" title="Tancar">X</button>
+
+      <div id="plan-no-auth" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar"><span class="status-dot"></span> SESSIÓ: NO INICIADA</div>
+        <h3>Accés <span class="hl">restringit</span></h3>
+        <p>Has d'iniciar sessió per seleccionar un pla.</p>
+        <div class="modal-actions">
+          <a href="login.html" class="modal-btn">Iniciar sessió</a>
+          <a href="login.html?tab=register" class="modal-btn outline">Crear compte</a>
+        </div>
+      </div>
+
+      <div id="plan-confirm" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar"><span class="status-dot ok"></span> SESSIÓ ACTIVA</div>
+        <h3>Confirmar pla <span class="hl" id="plan-confirm-name"></span></h3>
+        <p id="plan-confirm-desc"></p>
+        <div class="modal-actions">
+          <button class="modal-btn" onclick="confirmPlan()">Confirmar pla</button>
+          <button class="modal-btn outline" onclick="closePlanModal()">Cancel·lar</button>
+        </div>
+      </div>
+
+      <div id="plan-already" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar"><span class="status-dot ok"></span> SUBSCRIPCIÓ ACTIVA</div>
+        <h3>Ja tens un <span class="hl">pla actiu</span></h3>
+        <p>El teu compte ja té una subscripció activa.</p>
+        <div class="modal-actions">
+          <button class="modal-btn outline" onclick="closePlanModal()">Tancar</button>
+        </div>
+      </div>
+
+      <div id="plan-success" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar"><span class="status-dot ok"></span> PLA ACTIVAT</div>
+        <h3>Pla <span class="hl" id="plan-success-name"></span> activat!</h3>
+        <p>La teva subscripció s'ha activat correctament.</p>
+        <div class="modal-actions">
+          <button class="modal-btn" onclick="closePlanModal()">Continuar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script src="index.js"></script>
+  <script>
+  var _selectedPlan = '';
+
+  var planDesc = {
+    'Mensual': 'Subscripcio mensual. Podras cancel.lar en qualsevol moment.',
+    'Anual':   'Subscripcio anual amb descompte respecte al pla mensual.'
+  };
+
+  function openPlanModal(state) {
+    ['plan-no-auth','plan-confirm','plan-already','plan-success'].forEach(function(id) {
+      document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById(state).style.display = 'block';
+    document.getElementById('plan-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePlanModal() {
+    document.getElementById('plan-modal').classList.remove('open');
+    document.body.style.overflow = '';
+    _selectedPlan = '';
+  }
+
+  function closePlanModalOutside(e) {
+    if (e.target === document.getElementById('plan-modal')) closePlanModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePlanModal();
+  });
+
+  async function handlePlanClick(e, planName) {
+    e.preventDefault();
+    _selectedPlan = planName;
+    try {
+      var res  = await fetch('/api/check-session.php', { credentials: 'include' });
+      var data = await res.json();
+      if (!data.logged) {
+        openPlanModal('plan-no-auth');
+      } else if (data.subscrit) {
+        openPlanModal('plan-already');
+      } else {
+        document.getElementById('plan-confirm-name').textContent = planName;
+        document.getElementById('plan-confirm-desc').textContent = planDesc[planName] || '';
+        openPlanModal('plan-confirm');
+      }
+    } catch (err) {
+      openPlanModal('plan-no-auth');
+      console.warn('check-session error:', err);
+    }
+  }
+
+  async function confirmPlan() {
+    if (!_selectedPlan) return;
+    var btn = document.querySelector('#plan-confirm .modal-btn');
+    if (btn) { btn.textContent = 'Processant...'; btn.disabled = true; }
+    try {
+      var res  = await fetch('/api/subscribe.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pla: _selectedPlan.toLowerCase() })
+      });
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('plan-success-name').textContent = _selectedPlan;
+        openPlanModal('plan-success');
+      } else {
+        alert(data.error || 'Error en activar el pla.');
+        if (btn) { btn.textContent = 'Confirmar pla'; btn.disabled = false; }
+      }
+    } catch (err) {
+      alert('Servidor no disponible.');
+      if (btn) { btn.textContent = 'Confirmar pla'; btn.disabled = false; }
+    }
+  }
+  </script>
 </body>
+</html>
+
 </html>
