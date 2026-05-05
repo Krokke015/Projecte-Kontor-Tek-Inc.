@@ -569,8 +569,6 @@
       .nav-links { display: none; }
     }
 
-/* ===== NAV DOWNLOAD BUTTON ===== */
-/* Mismo clip-path que .nav-cta pero con fondo transparente y borde cian */
 .nav-dl {
   background: transparent !important;
   color: var(--accent) !important;
@@ -588,7 +586,6 @@
   color: var(--bg) !important;
 }
 
-/* ===== DOWNLOAD MODAL ===== */
 #dl-modal {
   display: none;
   position: fixed; inset: 0; z-index: 2000;
