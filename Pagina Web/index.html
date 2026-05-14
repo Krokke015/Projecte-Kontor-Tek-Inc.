@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontor Tek Inc. — Seguretat i Backup al Núvol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&family=Exo+2:wght@200;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="#inici" class="nav-logo">KONTOR<span>TEK</span></a>
+    <ul class="nav-links">
+      <li><a href="#qui-som">Qui som</a></li>
+      <li><a href="#programa">Programa</a></li>
+      <li><a href="#serveis">Serveis</a></li>
+      <li><a href="manual.html">Manual</a></li>
+    </ul>
+    <a href="login.html?tab=register" class="nav-cta">Registrar-se</a>
+    <a href="#" class="nav-cta nav-dl" onclick="handleDownloadClick(event)">Descàrrega</a>
+  </nav>
+
+  <section id="inici">
+    <span class="hero-badge">Sistema de seguretat</span>
+    <h1 class="hero-title">
+      <span class="line-dim">Kontor</span><br>
+      <span class="line-accent">Tek</span><br>
+    </h1>
+    <p class="hero-subtitle">
+      Kontor Tek Inc. ofereix seguretat proactiva i còpies de seguretat automatitzades per a empreses.
+    </p>
+    <div class="hero-actions">
+      <a href="#serveis" class="btn-primary">Veure plans</a>
+      <a href="#programa" class="btn-outline">Com funciona</a>
+    </div>
+    <div class="terminal-line">$ system_status: ALL_SERVICES_ONLINE █</div>
+  </section>
+
+  <section id="qui-som">
+    <div class="container">
+      <div class="section-label">Nosaltres</div>
+      <h2 class="section-title">Qui som</h2>
+      <div class="section-divider"></div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Kontor Tek Inc. és un projecte nascut a l'<strong>Institut Puig Castellar</strong> com a crèdit de síntesi. El nostre objectiu és desenvolupar una plataforma de subscripció que ofereixi als usuaris i empreses eines reals de ciberseguretat i backup.
+          </p>
+          <p>
+            
+            La nostra missió és democratitzar la seguretat digital. Creiem que qualsevol empresa, independentment de la seva mida, ha de poder disposar d'una solució integral per protegir els seus sistemes i garantir la continuïtat del negoci.
+          </p>
+          <p>
+            Oferim dues solucions principals: un <strong>programa de detecció de vulnerabilitats</strong> i un <strong>servei de còpies de seguretat al núvol</strong>, tot gestionat des d'un panell unificat.
+          </p>
+        </div>
+
+        <div class="team-cards">
+          <div class="section-label" style="margin-bottom:1rem">Equip</div>
+          <div class="team-card">
+            <div class="name">Yang Yun Chen</div>
+            <div class="role">Servidor web · Base de dades</div>
+          </div>
+          <div class="team-card">
+            <div class="name">Di Lu</div>
+            <div class="role">Programa de detecció de malware</div>
+          </div>
+          <div class="team-card">
+            <div class="name">Haoyang Xu</div>
+            <div class="role">Suport tècnic · Documentació · Seguiment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programa">
+    <div class="container">
+      <div class="section-label">Tecnologia</div>
+      <h2 class="section-title">El nostre programa</h2>
+      <div class="section-divider"></div>
+
+      <p style="color:var(--text-dim); max-width:640px;">
+        
+        Kontor Tek Inc. ofereix una plataforma web dinàmica que centralitza la gestió de la seguretat i els backups. La nostra solució automatitza tasques crítiques de TI perquè les empreses puguin centrar-se en el seu negoci.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Escaneig de Vulnerabilitats</h3>
+          <p>Detectem i analitzem amenaces en temps real a la teva xarxa. Generem informes detallats amb nivell de risc i accions recomanades per a cada vulnerabilitat.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Gestió de IPs</h3>
+          <p>Bloqueja i desbloqueja adreces MAC directament des del panell. El sistema pot actuar automàticament en detectar activitat sospitosa gràcies a triggers configurables.</p>
+        </div>
+        <div class="feature-card">
+          
+          <h3>Backup</h3>
+          <p>Configura la freqüència i l'abast de les teves còpies de seguretat. Accedeix i restaura les teves dades des de qualsevol lloc en qualsevol moment.</p>
+        </div>
+        <div class="feature-card">
+          
+          <h3>Informes de Seguretat</h3>
+          <p>Historial complet d'escaneigs, vulnerabilitats detectades i mesures preses. Visualitza l'evolució de la seguretat del teu sistema al llarg del temps.</p>
+        </div>
+        <div class="feature-card">
+          
+          <h3>Resposta Automàtica</h3>
+          <p>Triggers automàtics que actuen en detectar amenaces: bloqueig de IPs, notificacions i posada en llista negra sense intervenció manual.</p>
+        </div>
+        <div class="feature-card">
+          
+          <h3>Panell de Control</h3>
+          <p>Dashboard unificat per gestionar tots els serveis. Interfície accessible des de qualsevol dispositiu, dissenyada per a usuaris i administradors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="serveis">
+    <div class="container">
+      <div class="section-label">Subscripció</div>
+      <h2 class="section-title">Plans i Serveis</h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--text-dim); max-width:600px; margin-bottom:1rem;">
+        Escull el pla que millor s'adapta a les necessitats del teu negoci. Tots els plans inclouen accés al panell de control i suport tècnic.
+      </p>
+
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <div class="plan-name">Mensual</div>
+          <div class="plan-price-area">
+            <div class="plan-tbd">Preu per determinar</div>
+            <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim)">/ mes · facturació mensual</span>
+          </div>
+          <div class="plan-note">
+            Preu pendent de confirmació.
+          </div>
+          <a href="#" onclick="handlePlanClick(event,'Mensual')" class="btn-outline" style="display:block;text-align:center;padding:0.85rem">Seleccionar pla</a>
+        </div>
+
+        <div class="plan-card featured">
+          <div class="plan-name">Anual</div>
+          <div class="plan-price-area">
+            <div class="plan-tbd">Preu per determinar</div>
+            <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim)">/ any · facturació mensual</span>
+          </div>
+          <div class="plan-note">
+            Preu pendent de confirmació.
+          </div>
+          <a href="#" onclick="handlePlanClick(event,'Anual')" class="btn-primary" style="display:block;text-align:center">Seleccionar pla</a>
+        </div>
+
+      </div>
+
+      <p style="text-align:center; margin-top:2rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--text-dim);">
+       Pagament segur · Cancel·lació en qualsevol moment
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">KONTOR<span>TEK</span> INC.</div>
+    <p>Institut Puig Castellar · 2025–2026</p>
+    <p style="margin-top:0.5rem;">Yang Yun Chen · Di Lu · Haoyang Xu</p>
+  </footer>
+
+  <div id="toast"></div>
+
+  <div id="dl-modal" onclick="closeModalOutside(event)" aria-modal="true" role="dialog">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" title="Tancar">✕</button>
+
+      <div id="modal-no-auth" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar">
+          <span class="status-dot"></span> SESSIÓ: NO INICIADA
+        </div>
+        <h3>Accés <span class="hl">restringit</span></h3>
+        <p>Has d'iniciar sessió per poder descarregar el programari de Kontor Tek. Si no tens compte, pots crear-ne un gratuïtament.</p>
+        <div class="modal-actions">
+          <a href="login.html" class="modal-btn">Iniciar sessió</a>
+          <a href="login.html?tab=register" class="modal-btn outline">Crear compte</a>
+        </div>
+      </div>
+
+      <div id="modal-no-plan" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar">
+          <span class="status-dot warn"></span> PLA DE SUBSCRIPCIÓ: NO ACTIU
+        </div>
+        <h3>Necessites un <span class="hl-warn">pla actiu</span></h3>
+        <p>El teu compte no té cap subscripció activa. Selecciona un pla per accedir a la descàrrega del programari.</p>
+        <div class="modal-actions">
+          <a href="#serveis" class="modal-btn warn" onclick="closeModal()">Veure plans</a>
+          <button class="modal-btn outline" onclick="closeModal()">Cancel·lar</button>
+        </div>
+      </div>
+
+      <div id="modal-download" style="display:none">
+        <span class="modal-icon"></span>
+        <div class="modal-status-bar">
+          <span class="status-dot ok"></span> SUBSCRIPCIÓ ACTIVA · <span id="modal-plan-name"></span>
+        </div>
+        <h3>Descarregar <span class="hl">KontorTek</span></h3>
+        <p>Versió actual del programari de seguretat i backup.</p>
+        <div class="modal-actions">
+          <a href="#" onclick="triggerDownload(event)" class="modal-btn">⬇ Descarregar ara</a>
+          <button class="modal-btn outline" onclick="closeModal()">Tancar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="plan-modal" onclick="closePlanModalOutside(event)" aria-modal="true" role="dialog">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closePlanModal()" title="Tancar">X</button>
+
+      <div id="plan-no-auth" style="display:none">
+        <div class="modal-status-bar"><span class="status-dot"></span> SESSIO: NO INICIADA</div>
+        <h3>Acces <span class="hl">restringit</span></h3>
+        <p>Has d'iniciar sessio per seleccionar un pla.</p>
+        <div class="modal-actions">
+          <a href="login.html" class="modal-btn">Iniciar sessio</a>
+          <a href="login.html?tab=register" class="modal-btn outline">Crear compte</a>
+        </div>
+      </div>
+
+      <div id="plan-confirm" style="display:none">
+        <div class="modal-status-bar"><span class="status-dot ok"></span> SESSIO ACTIVA</div>
+        <h3>Confirmar pla <span class="hl" id="plan-confirm-name"></span></h3>
+        <p id="plan-confirm-desc"></p>
+        <div class="modal-actions">
+          <button class="modal-btn" onclick="confirmPlan()">Confirmar pla</button>
+          <button class="modal-btn outline" onclick="closePlanModal()">Cancel.lar</button>
+        </div>
+      </div>
+
+      <div id="plan-already" style="display:none">
+        <div class="modal-status-bar"><span class="status-dot ok"></span> SUBSCRIPCIO ACTIVA</div>
+        <h3>Ja tens un <span class="hl">pla actiu</span></h3>
+        <p>El teu compte ja te una subscripcio activa.</p>
+        <div class="modal-actions">
+          <button class="modal-btn outline" onclick="closePlanModal()">Tancar</button>
+        </div>
+      </div>
+
+      <div id="plan-success" style="display:none">
+        <div class="modal-status-bar"><span class="status-dot ok"></span> PLA ACTIVAT</div>
+        <h3>Pla <span class="hl" id="plan-success-name"></span> activat!</h3>
+        <p>La teva subscripcio s'ha activat correctament.</p>
+        <div class="modal-actions">
+          <button class="modal-btn" onclick="closePlanModal()">Continuar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+<script>
+  /* showToast */
+  function showToast(msg, type) {
+    var t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = (type === 'error') ? 'error show' : 'show';
+    setTimeout(function() { t.className = ''; }, 3500);
+  }
+
+  /* showMsg */
+  function showMsg(id, msg, type) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'form-msg ' + type;
+    el.style.display = 'block';
+  }
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  /* DOWNLOAD MODAL */
+  function openModal(state, planName) {
+    ['modal-no-auth','modal-no-plan','modal-download'].forEach(function(id) {
+      document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById(state).style.display = 'block';
+    if (planName) document.getElementById('modal-plan-name').textContent = planName.toUpperCase();
+    document.getElementById('dl-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('dl-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('dl-modal')) closeModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeModal(); closePlanModal(); }
+  });
+
+  async function handleDownloadClick(e) {
+    e.preventDefault();
+    try {
+      var res  = await fetch('/api/check-session.php', { credentials: 'include' });
+      var data = await res.json();
+      if (!data.logged)        openModal('modal-no-auth');
+      else if (!data.subscrit) openModal('modal-no-plan');
+      else                     openModal('modal-download', data.pla);
+    } catch (err) {
+      openModal('modal-no-auth');
+      console.warn('check-session error:', err);
+    }
+  }
+
+  /* Trigger actual download after session verified */
+  function triggerDownload(e) {
+    e.preventDefault();
+    window.location.href = '/api/download.php';
+  }
+
+  /* PLAN MODAL */
+  var _selectedPlan = '';
+  var planDesc = {
+    'Mensual': 'Subscripcio mensual. Podras cancel.lar en qualsevol moment.',
+    'Anual':   'Subscripcio anual amb descompte respecte al pla mensual.'
+  };
+
+  function openPlanModal(state) {
+    ['plan-no-auth','plan-confirm','plan-already','plan-success'].forEach(function(id) {
+      document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById(state).style.display = 'block';
+    document.getElementById('plan-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePlanModal() {
+    document.getElementById('plan-modal').classList.remove('open');
+    document.body.style.overflow = '';
+    _selectedPlan = '';
+  }
+
+  function closePlanModalOutside(e) {
+    if (e.target === document.getElementById('plan-modal')) closePlanModal();
+  }
+
+  async function handlePlanClick(e, planName) {
+    e.preventDefault();
+    _selectedPlan = planName;
+    try {
+      var res  = await fetch('/api/check-session.php', { credentials: 'include' });
+      var data = await res.json();
+      if (!data.logged) {
+        openPlanModal('plan-no-auth');
+      } else if (data.subscrit) {
+        openPlanModal('plan-already');
+      } else {
+        document.getElementById('plan-confirm-name').textContent = planName;
+        document.getElementById('plan-confirm-desc').textContent = planDesc[planName] || '';
+        openPlanModal('plan-confirm');
+      }
+    } catch (err) {
+      openPlanModal('plan-no-auth');
+      console.warn('check-session error:', err);
+    }
+  }
+
+  async function confirmPlan() {
+    if (!_selectedPlan) return;
+    var btn = document.querySelector('#plan-confirm .modal-btn');
+    if (btn) { btn.textContent = 'Processant...'; btn.disabled = true; }
+    try {
+      var res  = await fetch('/api/subscribe.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pla: _selectedPlan.toLowerCase() })
+      });
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('plan-success-name').textContent = _selectedPlan;
+        openPlanModal('plan-success');
+      } else {
+        alert(data.error || 'Error en activar el pla.');
+        if (btn) { btn.textContent = 'Confirmar pla'; btn.disabled = false; }
+      }
+    } catch (err) {
+      alert('Servidor no disponible.');
+      if (btn) { btn.textContent = 'Confirmar pla'; btn.disabled = false; }
+    }
+  }
+  </script>
+</html>
